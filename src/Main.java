@@ -4,12 +4,13 @@ public class Main {
 
 	public static void main(String[] args) {
 		int tipoArbitragem = 0;
+		Arbitro arbitro = new Arbitro();
 		
-		tipoArbitragem = exibirMenu();
-		System.out.println(tipoArbitragem);
+		tipoArbitragem = exibirArbitragens();
+		arbitro.arbitrar(tipoArbitragem);
 	}
 	
-	private static int exibirMenu() {
+	private static int exibirArbitragens() {
 		Scanner scanner = new Scanner(System.in);
 		int opcao = 0;
 		
