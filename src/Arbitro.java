@@ -47,12 +47,38 @@ public class Arbitro {
 	}
 	
 	private void priorizarFixamente() throws InterruptedException {
+		Periferico.ordenacaoCrescente = true;
+		
 		Collections.sort(this.perifericos);
+		
 		for (Iterator iterator = this.perifericos.iterator(); iterator.hasNext(); ) {  
 			   Periferico p = (Periferico) iterator.next();  
 			   System.out.println ("O dispositivo "+p.getNome()+" esta ativo!");
 			   Thread.sleep (p.getTempoExecucao() * 1000);
 		}
+	}
+	
+	private void priorizarRotativamente() throws InterruptedException {
+		Periferico.ordenacaoCrescente = true;
+		Scanner scanner = new Scanner(System.in);
+		int quantidadeRodadas = 0;
+		
+		System.out.print("Digite a quantidade de rodadas:");
+		quantidadeRodadas = Integer.parseInt(scanner.nextLine());
+		
+		for (int i = 0; i < quantidadeRodadas; i++) {
+			Collections.sort(this.perifericos);
+			
+			for (Iterator iterator = this.perifericos.iterator(); iterator.hasNext(); ) {  
+				   Periferico p = (Periferico) iterator.next();  
+				   System.out.println ("O dispositivo "+p.getNome()+" esta ativo!");
+				   Thread.sleep (p.getTempoExecucao() * 1000);
+			}
+			
+			Periferico.ordenacaoCrescente = !Periferico.ordenacaoCrescente;
+		}
+		
+		
 	}
 	
 	public void arbitrar(int tipoArbitragem) {
@@ -63,6 +89,12 @@ public class Arbitro {
 				priorizarFixamente();	
 			}catch (Exception e) {
 			
+			}
+		}else if(tipoArbitragem == 2) {
+			try {
+				priorizarRotativamente();
+			}catch(Exception e){
+				
 			}
 		}
 	}
