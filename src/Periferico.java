@@ -1,8 +1,19 @@
 
-public class Periferico {
+public class Periferico implements Comparable<Periferico>{
 	private String nome;
 	private int nivelprioridade;
 	private int tempoExecucao;
+	
+	@Override
+    public int compareTo(Periferico periferico) {
+		if (this.nivelprioridade < periferico.getNivelprioridade()) {
+	          return -1;
+	     }
+	     if (this.nivelprioridade > periferico.getNivelprioridade()) {
+	          return 1;
+	     }
+	     return 0;
+    }
 	
 	public String getNome() {
 		return nome;

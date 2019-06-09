@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -25,12 +26,12 @@ public class Arbitro {
 		System.out.print("Digite o nivel de prioridade:");
 		periferico.setNivelprioridade(Integer.parseInt(scanner.nextLine()));
 
-		System.out.print("Agora digite o tempo de execucao:");
+		System.out.print("Agora digite o tempo de execucao em segundos:");
 		periferico.setTempoExecucao(Integer.parseInt(scanner.nextLine()));
 		
 		return periferico;
 	}
-	// cria uma lista de perifericos 
+	// Preenche a lista de perifericos 
 	private void adicionarPeriferico() {
 		int quantidadePerifericos = 0;
 		Scanner scanner = new Scanner(System.in);
@@ -43,16 +44,26 @@ public class Arbitro {
 			periferico = capturarPeriferico();
 			this.perifericos.add(periferico);	
 		}		
-		
-		//verificando se está adicionando corretamente
+	}
+	
+	private void priorizarFixamente() throws InterruptedException {
+		Collections.sort(this.perifericos);
 		for (Iterator iterator = this.perifericos.iterator(); iterator.hasNext(); ) {  
 			   Periferico p = (Periferico) iterator.next();  
-			   System.out.println (p.getNome());  
+			   System.out.println ("O dispositivo "+p.getNome()+" esta ativo!");
+			   Thread.sleep (p.getTempoExecucao() * 1000);
 		}
 	}
 	
 	public void arbitrar(int tipoArbitragem) {
 		this.tipoArbitragem = tipoArbitragem;
 		adicionarPeriferico();
+		if (tipoArbitragem == 1) {
+			try {
+				priorizarFixamente();	
+			}catch (Exception e) {
+			
+			}
+		}
 	}
 }
