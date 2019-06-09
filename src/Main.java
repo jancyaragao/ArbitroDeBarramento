@@ -16,10 +16,9 @@ public class Main {
 		
 		do {
 			System.out.println("Escolha o tipo de arbitragem:");
-			System.out.println("1- Daisy Chaining.");
-			System.out.println("2- Prioridade Fixa.");
-			System.out.println("3- Prioridade Rotativa.");
-			System.out.println("4- Prioridade justa.");
+			System.out.println("1- Prioridade Fixa.");
+			System.out.println("2- Prioridade Rotativa.");
+			System.out.println("3- Prioridade justa.");
 			
 			opcao = Integer.parseInt(scanner.nextLine());
 			
@@ -32,7 +31,7 @@ public class Main {
 	private static boolean verificarEscolha(int escolha) {
 		if (escolha < 1) {
 			return true;
-		} else if ( escolha > 4) {
+		} else if ( escolha > 3) {
 			return true;
 		}
 		
