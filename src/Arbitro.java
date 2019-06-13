@@ -81,6 +81,45 @@ public class Arbitro {
 		
 	}
 	
+	private void priorizarJustamente() throws InterruptedException{
+		Periferico.ordenacaoCrescente = true;
+	
+		//Collections.sort(this.perifericos);
+		
+		while(!this.perifericos.isEmpty()) {
+			int contador = 0;
+			
+			for (Iterator iterator = this.perifericos.iterator(); iterator.hasNext(); ) {  
+				   Periferico p = (Periferico) iterator.next();  
+				  
+				   if(p.getTempoExecucao() > 5) {
+					   System.out.println ("O dispositivo "+p.getNome()+" esta ativo!");
+					   p.setTempoExecucao(p.getTempoExecucao() - 5);
+					   Thread.sleep(5000);
+				   }else if(p.getTempoExecucao() > 0 && p.getTempoExecucao() <= 5) {
+					   System.out.println ("O dispositivo "+p.getNome()+" esta ativo!");
+					   Thread.sleep (p.getTempoExecucao() * 1000);
+					   p.setTempoExecucao(0);
+					   //this.perifericos.remove(p);
+				   }
+			}
+			
+			for(Iterator iterator = this.perifericos.iterator(); iterator.hasNext();) {
+				Periferico p = (Periferico) iterator.next(); 
+				if(p.getTempoExecucao() == 0) {
+					contador++;
+				}
+			}
+			
+			if( contador == this.perifericos.size()) {
+				this.perifericos.clear();
+			}
+		}
+		
+		
+		
+	}
+	
 	public void arbitrar(int tipoArbitragem) {
 		this.tipoArbitragem = tipoArbitragem;
 		adicionarPeriferico();
@@ -93,6 +132,12 @@ public class Arbitro {
 		}else if(tipoArbitragem == 2) {
 			try {
 				priorizarRotativamente();
+			}catch(Exception e){
+				
+			}
+		}else if(tipoArbitragem == 3) {
+			try {
+				priorizarJustamente();
 			}catch(Exception e){
 				
 			}
