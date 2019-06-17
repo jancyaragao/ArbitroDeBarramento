@@ -1,3 +1,4 @@
+package br.edu.ufrn.imd.arquitetura.model;
 
 public class Periferico implements Comparable<Periferico>{
 	private String nome;
@@ -15,7 +16,7 @@ public class Periferico implements Comparable<Periferico>{
 		          return 1;
 		     }
 		     return 0;
-		}else {
+		} else {
 			if (this.nivelprioridade > periferico.getNivelprioridade()) {
 		          return -1;
 		     }
@@ -45,6 +46,5 @@ public class Periferico implements Comparable<Periferico>{
 	public void setTempoExecucao(int tempoExecucao) {
 		this.tempoExecucao = tempoExecucao;
 	}
-	
-	
+		
 }
