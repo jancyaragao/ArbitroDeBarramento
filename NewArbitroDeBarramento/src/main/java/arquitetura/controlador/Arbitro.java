@@ -14,6 +14,21 @@ public class Arbitro {
 		perifericos = new ArrayList<Periferico>();
 	}
 	
+	// Preenche a lista de perifericos 
+	public void adicionarPeriferico() {
+		int quantidadePerifericos = 0;
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.print("Digite a quantidade de periféricos que será adicionado: ");
+		quantidadePerifericos = Integer.parseInt(scanner.nextLine());
+		
+		for (int i = 0; i < quantidadePerifericos; i++) {
+			Periferico periferico = new Periferico();
+			periferico = capturarPeriferico(i + 1);
+			this.perifericos.add(periferico);	
+		}
+	}
+	
 	// Capturar o periferico com base nas informações do usuário.
 	private Periferico capturarPeriferico(int ordem) {
 		Scanner scanner = new Scanner(System.in);
@@ -30,21 +45,6 @@ public class Arbitro {
 		periferico.setTempoExecucao(Integer.parseInt(scanner.nextLine()));
 		
 		return periferico;
-	}
-	
-	// Preenche a lista de perifericos 
-	public void adicionarPeriferico() {
-		int quantidadePerifericos = 0;
-		Scanner scanner = new Scanner(System.in);
-		
-		System.out.print("Digite a quantidade de periféricos que será adicionado: ");
-		quantidadePerifericos = Integer.parseInt(scanner.nextLine());
-		
-		for (int i = 0; i < quantidadePerifericos; i++) {
-			Periferico periferico = new Periferico();
-			periferico = capturarPeriferico(i + 1);
-			this.perifericos.add(periferico);	
-		}
 	}
 	
 	public void prioridadeFixa() throws InterruptedException {
@@ -86,7 +86,9 @@ public class Arbitro {
 	
 	public void prioridadePorJustica() throws InterruptedException{
 		Periferico.ordenacaoCrescente = true;
-	
+		
+		Collections.sort(this.perifericos);
+		
 		System.out.println("\nPRIORIDADE POR JUSTIÇA:\n-----------------------------");
 		
 		while(!this.perifericos.isEmpty()) {
